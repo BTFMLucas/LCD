@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Bereich</title>
+  <link rel="stylesheet" href="design.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Bereich</h1>
+    <div id="loginDiv">
+      <form id="loginForm">
+        <label for="password">Admin Passwort</label>
+        <input type="password" id="password" required placeholder="Passwort eingeben" />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <div id="adminContent" style="display:none;">
+      <section class="admin-section" id="newsSection">
+        <h2>News verwalten</h2>
+        <form id="newsForm">
+          <label for="newsText">News Text:</label>
+          <textarea id="newsText" rows="3" placeholder="News hinzufügen..." required></textarea>
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="newsVisible" checked />
+            News sichtbar
+          </label>
+
+          <button type="submit">News speichern</button>
+        </form>
+        <div class="item-list" id="newsList"></div>
+      </section>
+
+      <section class="admin-section" id="videosSection">
+        <h2>YouTube Videos verwalten</h2>
+        <form id="videoForm">
+          <label for="videoTitle">Video Titel:</label>
+          <input type="text" id="videoTitle" placeholder="Titel des Videos" required />
+
+          <label for="videoURL">YouTube Video URL:</label>
+          <input type="text" id="videoURL" placeholder="z.B. https://www.youtube.com/watch?v=XYZ" required />
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="videoVisible" checked />
+            Video sichtbar
+          </label>
+
+          <button type="submit">Video speichern</button>
+        </form>
+        <div class="item-list" id="videoList"></div>
+      </section>
+
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "deinSicheresPasswort123";
+
+    const loginDiv = document.getElementById("loginDiv");
+    const adminContent = document.getElementById("adminContent");
+    const loginForm = document.getElementById("loginForm");
+    const passwordInput = document.getElementById("password");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // News Elements
+    const newsForm = document.getElementById("newsForm");
+    const newsText = document.getElementById("newsText");
+    const newsVisible = document.getElementById("newsVisible");
+    const newsList = document.getElementById("newsList");
+
+    // Videos Elements
+    const videoForm = document.getElementById("videoForm");
+    const videoTitle = document.getElementById("videoTitle");
+    const videoURL = document.getElementById("videoURL");
+    const videoVisible = document.getElementById("videoVisible");
+    const videoList = document.getElementById("videoList");
+
+    // Check if logged in (sessionStorage)
+    if(sessionStorage.getItem("loggedIn") === "true"){
+      showAdmin();
+    }
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if(passwordInput.value === ADMIN_PASSWORD){
+        sessionStorage.setItem("loggedIn", "true");
+        showAdmin();
+      } else {
+        alert("Falsches Passwort!");
+      }
+      passwordInput.value = "";
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      sessionStorage.removeItem("loggedIn");
+      adminContent.style.display = "none";
+      loginDiv.style.display = "block";
+    });
+
+    function showAdmin() {
+      loginDiv.style.display = "none";
+      adminContent.style.display = "block";
+      loadNews();
+      loadVideos();
+    }
+
+    // Load and Render News
+    function loadNews(){
+      let news = JSON.parse(localStorage.getItem("news")) || [];
+      newsList.innerHTML = "";
+      news.forEach((item, index) => {
+        if(item.visible){
+          const div = document.createElement("div");
+          div.innerHTML = `<strong>${item.text}</strong> <button class="delete-btn" data-index="${index}">Löschen</button>`;
+          newsList.appendChild(div);
+          div.querySelector("button").addEventListener("click", () => {
+            deleteNews(index);
+          });
+        }
+      });
+    }
+
+    newsForm.addEventListener("submit", e => {
+      e.preventDefault();
+      let news = JSON.parse(localStorage.getItem("news")) || [];
+      news.push({
+        text: newsText.value,
+        visible: newsVisible.checked
+      });
+      localStorage.setItem("news", JSON.stringify(news));
+      newsText.value = "";
+      newsVisible.checked = true;
+      loadNews();
+    });
+
+    function deleteNews(index){
+      let news = JSON.parse(localStorage.getItem("news")) || [];
+      news.splice(index, 1);
+      localStorage.setItem("news", JSON.stringify(news));
+      loadNews();
+    }
+
+    // Load and Render Videos
+    function loadVideos(){
+      let videos = JSON.parse(localStorage.getItem("videos")) || [];
+      videoList.innerHTML = "";
+      videos.forEach((item, index) => {
+        if(item.visible){
+          const div = document.createElement("div");
+          div.innerHTML = `<strong>${item.title}</strong> <button class="delete-btn" data-index="${index}">Löschen</button>`;
+          videoList.appendChild(div);
+          div.querySelector("button").addEventListener("click", () => {
+            deleteVideo(index);
+          });
+        }
+      });
+    }
+
+    videoForm.addEventListener("submit", e => {
+      e.preventDefault();
+      let videos = JSON.parse(localStorage.getItem("videos")) || [];
+      videos.push({
+        title: videoTitle.value,
+        url: videoURL.value,
+        visible: videoVisible.checked
+      });
+      localStorage.setItem("videos", JSON.stringify(videos));
+      videoTitle.value = "";
+      videoURL.value = "";
+      videoVisible.checked = true;
+      loadVideos();
+    });
+
+    function deleteVideo(index){
+      let videos = JSON.parse(localStorage.getItem("videos")) || [];
+      videos.splice(index, 1);
+      localStorage.setItem("videos", JSON.stringify(videos));
+      loadVideos();
+    }
+  </script>
+</body>
+</html>

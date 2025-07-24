@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LCD Discord Website</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: rgba(0,0,0,0.3);
+    padding: 20px 40px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #ffcc00;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  }
+
+  nav {
+    background: rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    gap: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: #ffd54f;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  nav a:hover,
+  nav a.active {
+    background-color: #ffcc00;
+    color: #222;
+    box-shadow: 0 0 8px #ffcc00;
+  }
+
+  main {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px 30px;
+    background: rgba(0,0,0,0.35);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  }
+
+  section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h2 {
+    color: #ffcc00;
+    margin-top: 0;
+    margin-bottom: 15px;
+    letter-spacing: 1.2px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #eee;
+  }
+
+  strong {
+    display: inline-block;
+    width: 140px;
+    color: #fff176;
+  }
+
+  a.inline-link {
+    color: #ffeb3b;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  a.inline-link:hover {
+    text-decoration: underline;
+  }
+
+  footer {
+    background: rgba(0,0,0,0.3);
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9rem;
+    color: #cddc39;
+    box-shadow: inset 0 1px 4px rgba(255,255,255,0.15);
+    user-select: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    nav {
+      flex-direction: column;
+      gap: 10px;
+    }
+    main {
+      margin: 20px 15px;
+      padding: 15px 20px;
+      border-radius: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>LCD Discord Website</h1>
+</header>
+
+<nav>
+  <a href="#" data-section="home" class="active">Startseite</a>
+  <a href="#" data-section="info">Info</a>
+  <a href="#" data-section="kontakt">Kontakt</a>
+  <a href="#" data-section="impressum">Impressum</a>
+  <a href="admin.html" target="_blank" rel="noopener noreferrer">Admin</a>
+</nav>
+
+<main>
+  <section id="home" class="active">
+    <h2>Willkommen auf der Startseite</h2>
+    <p>Schön, dass du hier bist! Hier findest du spannende Infos rund um den LCD Discord.</p>
+  </section>
+
+  <section id="info">
+    <h2>Informationen</h2>
+    <p>Hier gibt es allerlei Details und interessante Inhalte, die dir weiterhelfen.</p>
+  </section>
+
+  <section id="kontakt">
+    <h2>Kontakt</h2>
+    <p>Du willst mit uns sprechen? Schreib uns eine E-Mail oder besuche unsere Webseite.</p>
+  </section>
+
+  <section id="impressum">
+    <h2>Impressum</h2>
+    <p><strong>Angaben gemäß § 5 TMG:</strong><br>
+    LCD Discord Website</p>
+
+    <p><strong>Kontakt:</strong><br>
+    Telefon: Noch unbekannt<br>
+    E-Mail: <a href="mailto:teamlcddiscord@gmail.com" class="inline-link">teamlcddiscord@gmail.com</a><br>
+    Webseite: <a href="https://sites.google.com/view/lcd-website" target="_blank" class="inline-link" rel="noopener noreferrer">sites.google.com/view/lcd-website</a></p>
+
+    <p><strong>Vertreten durch:</strong><br>
+    Lucas B.</p>
+
+    <h3>Haftungsausschluss</h3>
+    <p>Die Inhalte dieser Webseite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehmen wir jedoch keine Gewähr.</p>
+
+    <h3>Urheberrecht</h3>
+    <p>Alle Bilder und Inhalte auf dieser Webseite sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung oder jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+
+    <footer>
+      &copy; 2025 LCD. Alle Rechte vorbehalten.<br>
+      Alle Bilder auf dieser Webseite sind urheberrechtlich geschützt.<br>
+      "Alle Rechte vorbehalten" bedeutet, dass niemand deine Inhalte ohne Erlaubnis nutzen darf.<br>
+      "Urheberrechtlich geschützt" stellt klar, dass die Bilder nicht kopiert, verändert oder verbreitet werden dürfen.
+    </footer>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 LCD Discord Website – Alle Rechte vorbehalten
+</footer>
+
+<script>
+  const navLinks = document.querySelectorAll('nav a[data-section]');
+  const sections = document.querySelectorAll('main section');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      // Deaktiviere alle Links
+      navLinks.forEach(l => l.classList.remove('active'));
+      // Aktiviere den geklickten Link
+      link.classList.add('active');
+
+      const target = link.getAttribute('data-section');
+
+      sections.forEach(sec => {
+        if (sec.id === target) {
+          const visible = localStorage.getItem('sichtbarkeit_' + sec.id);
+          if (visible === 'false') {
+            sec.style.display = 'none';
+            sec.classList.remove('active');
+          } else {
+            sec.style.display = 'block';
+            setTimeout(() => sec.classList.add('active'), 10);
+          }
+        } else {
+          sec.classList.remove('active');
+          sec.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Sichtbarkeit aus localStorage direkt beim Laden einstellen
+  window.addEventListener('load', () => {
+    sections.forEach(sec => {
+      const visible = localStorage.getItem('sichtbarkeit_' + sec.id);
+      if (visible === 'false') {
+        sec.style.display = 'none';
+        sec.classList.remove('active');
+      } else {
+        sec.style.display = '';
+        if (sec.id === 'home') {
+          sec.classList.add('active');
+        }
+      }
+    });
+
+    // Falls Startseite ausgeblendet, aktiviere erste sichtbare Sektion im Nav
+    const firstVisible = Array.from(sections).find(s => s.style.display !== 'none');
+    if (firstVisible) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const aktLink = Array.from

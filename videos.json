@@ -1,0 +1,36 @@
+const videoPage = document.getElementById("videoPage");
+
+// Beim Laden Videos anzeigen
+function loadVideos(){
+  let videos = JSON.parse(localStorage.getItem("videos")) || [];
+  videoList.innerHTML = "";
+  videos.forEach((item, index) => {
+    if(item.visible){
+      const div = document.createElement("div");
+      div.innerHTML = `<strong>${item.title}</strong> <em style="color:#ccc; font-size:0.9rem;">[${item.page}]</em> 
+                       <button class="delete-btn" data-index="${index}">Löschen</button>`;
+      videoList.appendChild(div);
+      div.querySelector("button").addEventListener("click", () => {
+        deleteVideo(index);
+      });
+    }
+  });
+}
+
+// Beim Video speichern jetzt mit page
+videoForm.addEventListener("submit", e => {
+  e.preventDefault();
+  let videos = JSON.parse(localStorage.getItem("videos")) || [];
+  videos.push({
+    title: videoTitle.value,
+    url: videoURL.value,
+    page: videoPage.value,         // NEU: Unterseite speichern
+    visible: videoVisible.checked
+  });
+  localStorage.setItem("videos", JSON.stringify(videos));
+  videoTitle.value = "";
+  videoURL.value = "";
+  videoPage.value = "";           // Reset Dropdown
+  videoVisible.checked = true;
+  loadVideos();
+});
