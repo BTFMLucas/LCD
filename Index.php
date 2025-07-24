@@ -2,52 +2,54 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Lucas' kreative Welt</title>
+  <title>Community Connect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      font-family: sans-serif;
-      background: #243b55;
-      color: white;
-      text-align: center;
-      padding: 50px;
-    }
-
-    h1 {
-      font-size: 48px;
-    }
-
-    nav {
-      margin: 40px 0;
-    }
-
-    .btn {
-      background-color: #4facfe;
-      color: white;
-      padding: 15px 25px;
-      margin: 10px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 18px;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      background-color: #00f2fe;
-    }
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; }
+    header { background-color: #ff6600; color: white; padding: 20px; text-align: center; }
+    section { padding: 20px; max-width: 900px; margin: auto; }
+    iframe { width: 100%; height: 315px; margin-bottom: 20px; border: none; }
+    .discord { text-align: center; margin-top: 40px; }
+    footer { background-color: #eee; text-align: center; padding: 10px; font-size: 0.9em; }
   </style>
 </head>
 <body>
-  <h1>Willkommen auf Lucas' Website</h1>
 
-  <nav>
-    <a href="index.php" class="btn">Startseite</a>
-    <a href="galerie.php" class="btn">Galerie</a>
-    <a href="uebermich.php" class="btn">Über mich</a>
-    <a href="kontakt.php" class="btn">Kontakt</a>
-  </nav>
+  <header>
+    <h1>Community Connect</h1>
+    <p>Verbinde dich mit Gleichgesinnten – online und lokal</p>
+  </header>
 
-  <p>Hier findest du kreative Inhalte, Bilder und mehr – klick dich durch!</p>
+  <section>
+    <h2>🎬 Unsere YouTube-Videos</h2>
+
+    <?php
+      // Liste der YouTube-Video-IDs
+      $videos = [
+        "WtmllIlFOGc",
+        "y43WZDguYYI",
+        "pmAbhnAvJS8"
+      ];
+
+      // Videos einbetten
+      foreach ($videos as $videoId) {
+        echo "<iframe src='https://www.youtube.com/embed/$videoId' allowfullscreen></iframe>";
+      }
+    ?>
+  </section>
+
+  <section class="discord">
+    <h2>💬 Unser Discord-Server</h2>
+    <p>Trete unserer Community bei und diskutiere live!</p>
+    <iframe src="https://discord.com/widget?id=DEIN_SERVER_ID&theme=light"
+            allowtransparency="true"
+            sandbox="allow-popups allow-scripts allow-same-origin allow-presentation">
+    </iframe>
+  </section>
+
+  <footer>
+    &copy; <?= date("Y") ?> Community Connect · <a href="#">Impressum</a> · <a href="#">Datenschutz</a>
+  </footer>
+
 </body>
 </html>
